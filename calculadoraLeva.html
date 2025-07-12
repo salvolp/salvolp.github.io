@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Levadura para Pizza</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      padding: 20px;
+      color: #333;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      color: #d62828;
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 30px;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    input {
+      padding: 10px;
+      width: 100%;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #d62828;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #a61d1d;
+    }
+    #resultado {
+      margin-top: 25px;
+      background: #fff8e1;
+      padding: 15px;
+      border-left: 5px solid #ffb703;
+      border-radius: 6px;
+      font-size: 1.1em;
+      white-space: pre-wrap;
+    }
+    .grupo {
+      margin-bottom: 20px;
+    }
+    .seccion {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculadora de Levadura para Pizza</h1>
+
+  <div class="seccion">
+    <div class="grupo">
+      <label>Fermentación en bloque</label>
+      <input type="number" id="temp1" placeholder="Temperatura (°C)" step="0.1">
+      <input type="number" id="hora1" placeholder="Horas">
+    </div>
+    <div class="grupo">
+      <label>Reposo en bollos (frío)</label>
+      <input type="number" id="temp2" placeholder="Temperatura (°C)" step="0.1">
+      <input type="number" id="hora2" placeholder="Horas">
+    </div>
+    <div class="grupo">
+      <label>Temperado final</label>
+      <input type="number" id="temp3" placeholder="Temperatura (°C)" step="0.1">
+      <input type="number" id="hora3" placeholder="Horas">
+    </div>
+    <div class="grupo">
+      <label>Constante de cálculo (3000 recomendado)</label>
+      <input type="number" id="constante" value="3000">
+    </div>
+  </div>
+
+  <button onclick="calcularLevadura()">Calcular % de levadura</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    function calcularLevadura() {
+      let t1 = parseFloat(document.getElementById('temp1').value) || 0;
+      let h1 = parseFloat(document.getElementById('hora1').value) || 0;
+      let t2 = parseFloat(document.getElementById('temp2').value) || 0;
+      let h2 = parseFloat(document.getElementById('hora2').value) || 0;
+      let t3 = parseFloat(document.getElementById('temp3').value) || 0;
+      let h3 = parseFloat(document.getElementById('hora3').value) || 0;
+      let k = parseFloat(document.getElementById('constante').value) || 3000;
+
+      let total = (t1 * h1 + t2 * h2 + t3 * h3);
+      let porcentajeDecimal = total / k;
+      let porcentaje = porcentajeDecimal * 100;
+      let gramos = porcentaje;
+
+      document.getElementById('resultado').innerText = `
+Levadura fresca recomendada:
+→ ${porcentaje.toFixed(2)}% del peso de la harina
+→ ${gramos.toFixed(2)} gramos por cada 1 kg de harina
+`;
+    }
+  </script>
+</body>
+</html>
